@@ -1,25 +1,18 @@
 <script setup>
 import { ref } from 'vue';
 import Modal from './components/Modal.vue';
-const title = ref('My first Vue app');
-const name = ref(null);
-const appText = 'Mám ráda červenou?';
-const red = ref('red');
 
-function handleClick() {
-  console.log(name.value);
-  name.value.classList.add('active');
+const appText = 'Mám ráda červenou?';
+const theme = ref('ANO');
+
+function toggleTheme() {
+  theme.value = theme.value === 'ANO' ? 'NE' : 'ANO';
 }
 </script>
 
 <template>
-  <h1>{{ title }}</h1>
-  <Modal :header="appText" :theme="'red'" />
-  <button @click="handleClick">Click me</button>
-
-  <input type="text" ref="name" />
+  <Modal :header="appText" :theme="theme" :onToggle="toggleTheme" />
 </template>
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -33,5 +26,9 @@ h1 {
   border-bottom: 1px, solid, #ddd;
   display: inline-block;
   padding-bottom: 10px;
+}
+button {
+  margin: 10px;
+  padding: 8px 15px;
 }
 </style>

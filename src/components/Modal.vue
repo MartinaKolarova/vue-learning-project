@@ -1,17 +1,24 @@
 <script setup>
+import { ref } from 'vue';
+
 const props = defineProps({
   header: String,
   theme: String,
+  onToggle: Function,
 });
 </script>
 <template>
   <div class="backdrop">
-    <div class="modal" :class="{ red: theme === 'red' }">
+    <div class="modal" :class="theme">
       <h1>{{ props.header }}</h1>
       <p>{{ props.theme }}</p>
+      <button @click="props.onToggle">
+        {{ props.theme === 'ANO' ? 'NE' : 'ANO' }}
+      </button>
     </div>
   </div>
 </template>
+
 <style>
 .modal {
   width: 400px;
@@ -33,11 +40,15 @@ const props = defineProps({
   border: none;
   padding: 0;
 }
-.modal.red {
+.modal.ANO {
   background: crimson;
   color: white;
 }
-.modal.red h1 {
+.modal h1 {
+  color: white;
+}
+.modal.NE {
+  background: steelblue;
   color: white;
 }
 </style>
